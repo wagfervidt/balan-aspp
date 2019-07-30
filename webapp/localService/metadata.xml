@@ -1,0 +1,209 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:Reference
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='S4_BACKEND')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='S4_BACKEND')/$value">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='S4_BACKEND')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZC_ORDENS_CDS" xml:lang="pt" sap:schema-version="1">
+            <EntityType Name="ZC_ORDENSType" sap:label="Ordens de Produção :: Views de Consumo" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="aufnr"/>
+                    <PropertyRef Name="posnr"/>
+                </Key>
+                <Property Name="aufnr" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="Ordem" sap:quickinfo="Nº ordem"/>
+                <Property Name="posnr" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Nº do item" sap:quickinfo="Nº item da ordem"/>
+                <Property Name="matnr" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Nº material para ordem"/>
+                <Property Name="maktx" Type="Edm.String" MaxLength="40" sap:label="Texto breve material" sap:quickinfo="Texto breve de material"/>
+                <Property Name="charg" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Lote" sap:quickinfo="Número do lote"/>
+                <Property Name="psobs" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Suprimento especial" sap:quickinfo="Tipo de suprimento especial"/>
+                <Property Name="qunum" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Quotização" sap:quickinfo="Nº quotização"/>
+                <Property Name="qupos" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Item de quotização"/>
+                <Property Name="projn" Type="Edm.String" MaxLength="24" sap:display-format="NonNegative" sap:label="Elemento PEP" sap:quickinfo="Elemento do plano da estrutura do projeto (elemento PEP)"/>
+                <Property Name="plnum" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Ordem planejada"/>
+                <Property Name="strmp" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Dt.início planejada" sap:quickinfo="Data planejada de início da ordem planejada"/>
+                <Property Name="etrmp" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Dt.abertura planej." sap:quickinfo="Data de abertura da ordem planejada"/>
+                <Property Name="kdauf" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Ordem do cliente"/>
+                <Property Name="kdpos" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative" sap:label="Item ordem cliente" sap:quickinfo="Item da ordem do cliente"/>
+                <Property Name="kdein" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Divisão ord.cliente" sap:quickinfo="Divisão de ordem de cliente"/>
+                <Property Name="beskz" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Tipo de suprimento"/>
+                <Property Name="psamg" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="amein" sap:label="Refugo planejado" sap:quickinfo="Quantidade de refugo planejada do item de ordem"/>
+                <Property Name="psmng" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="amein" sap:label="Quantidade total" sap:quickinfo="Quantidade total planejada de item da ordem"/>
+                <Property Name="wemng" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="amein" sap:label="Quantidade EM" sap:quickinfo="Quantidade de entrada de mercadorias para item da ordem"/>
+                <Property Name="iamng" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="amein" sap:label="Desvio previsto" sap:quickinfo="Excedente/déficit previsto para entrada de mercadorias"/>
+                <Property Name="amein" Type="Edm.String" MaxLength="3" sap:label="Unid.med.ordem" sap:quickinfo="Unidade de medida para produção interna" sap:semantics="unit-of-measure"/>
+                <Property Name="meins" Type="Edm.String" MaxLength="3" sap:label="Unid.medida básica" sap:quickinfo="Unidade de medida básica" sap:semantics="unit-of-measure"/>
+                <Property Name="pamng" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="meins" sap:label="Quantidade de refugo" sap:quickinfo="Quantidade de refugo planejada"/>
+                <Property Name="pgmng" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="meins" sap:label="Qtd.total da ordem" sap:quickinfo="Quantidade total ordem planejada"/>
+                <Property Name="knttp" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Ctg.ClassCont." sap:quickinfo="Categoria de classificação contábil"/>
+                <Property Name="tpauf" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Conversão parc." sap:quickinfo="Código: conversão parcial"/>
+                <Property Name="ltrmi" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Data real da remessa" sap:quickinfo="Remessa real/data do fim"/>
+                <Property Name="ltrmp" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Remessa planejada" sap:quickinfo="Data da remessa da ordem planejada"/>
+                <Property Name="kalnr" Type="Edm.String" MaxLength="12" sap:display-format="NonNegative" sap:label="Nº cálc.csts." sap:quickinfo="Nº cálculo de custos p/cálc.custos sem estrut.quantitativa"/>
+                <Property Name="uebto" Type="Edm.Decimal" Precision="3" Scale="1" sap:label="Tol.fornec.excessivo" sap:quickinfo="Limite de tolerância para fornecimento excessivo"/>
+                <Property Name="uebtk" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Forn.exces.s/limites" sap:quickinfo="Código: fornecimento excessivo permitido sem limites"/>
+                <Property Name="untto" Type="Edm.Decimal" Precision="3" Scale="1" sap:label="Tol.fornmto.incompl." sap:quickinfo="Limite de tolerância para fornecimento incompleto"/>
+                <Property Name="insmk" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Tipo de estoque"/>
+                <Property Name="wepos" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Entrada mercadorias" sap:quickinfo="Código de entrada de mercadorias"/>
+                <Property Name="bwtar" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Tipo de avaliação"/>
+                <Property Name="bwtty" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Ctg.avaliação" sap:quickinfo="Categoria de avaliação"/>
+                <Property Name="pwerk" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Centro planejamento" sap:quickinfo="Centro de planejamento para uma ordem"/>
+                <Property Name="lgort" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Depósito"/>
+                <Property Name="umrez" Type="Edm.Decimal" Precision="5" Scale="0" sap:label="Contador" sap:quickinfo="Contador para a conversão em UMs básicas"/>
+                <Property Name="umren" Type="Edm.Decimal" Precision="5" Scale="0" sap:label="Denominador" sap:quickinfo="Denominador para a conversão em unidades de medida básicas"/>
+                <Property Name="webaz" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="Tempo procmto.EM" sap:quickinfo="Duração de processamento em dias da entrada de mercadorias"/>
+                <Property Name="elikz" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Recebimento final" sap:quickinfo="Código do recebimento final"/>
+                <Property Name="safnr" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Ordem prod.rep." sap:quickinfo="Nº ordem de produção repetitiva"/>
+                <Property Name="verid" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Versão de produção"/>
+                <Property Name="sernr" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Nº de série"/>
+                <Property Name="techs" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Avaliação standard" sap:quickinfo="Avaliação de validade/avaliação standard"/>
+                <Property Name="dwerk" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Centro"/>
+                <Property Name="dauty" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Categoria de ordem"/>
+                <Property Name="dauat" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Tipo de ordem"/>
+                <Property Name="dgltp" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Data-base do fim"/>
+                <Property Name="dglts" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Fim programado"/>
+                <Property Name="dfrei" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Cód.liberação" sap:quickinfo="Código: ordem liberada / liberada parcialmente (para MRP)"/>
+                <Property Name="dnrel" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Irrelevante para MRP" sap:quickinfo="Código: item da ordem irrelevante para MRP"/>
+                <Property Name="verto" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Chave distribuição" sap:quickinfo="Chave de distribuição MRP"/>
+                <Property Name="sobkz" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Estoque especial" sap:quickinfo="Código de estoque especial"/>
+                <Property Name="kzvbr" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Consumo" sap:quickinfo="Registro do consumo"/>
+                <Property Name="wewrt" Type="Edm.Decimal" Precision="14" Scale="3" sap:label="Valor EM" sap:quickinfo="Valor da entrada de mercadorias em moeda interna"/>
+                <Property Name="weunb" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="EM não avaliada" sap:quickinfo="Entrada de mercadoria não avaliada"/>
+                <Property Name="ablad" Type="Edm.String" MaxLength="25" sap:label="Ponto de descarga"/>
+                <Property Name="wempf" Type="Edm.String" MaxLength="12" sap:label="Recebedor mercadoria" sap:quickinfo="Recebedor da mercadoria"/>
+                <Property Name="gsber" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Divisão"/>
+                <Property Name="weaed" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="EM modific." sap:quickinfo="Código: código entrada de mercadoria pode ser modificado"/>
+                <Property Name="cuobj" Type="Edm.String" MaxLength="18" sap:display-format="NonNegative" sap:label="Nº interno do objeto" sap:quickinfo="Configuração (nº interno de objeto)"/>
+                <Property Name="kbnkz" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Abast.produção" sap:quickinfo="Tipo do abastecimento da produção"/>
+                <Property Name="arsnr" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Reserva liquidação" sap:quickinfo="Nº reserva de liquidação"/>
+                <Property Name="arsps" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Item reserva liquid." sap:quickinfo="Nº item da reserva de liquidação"/>
+                <Property Name="krsnr" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Reserva" sap:quickinfo="Nº reserva / necessidades dependentes"/>
+                <Property Name="krsps" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Nº item da reserva / das necessidades dependentes"/>
+                <Property Name="kckey" Type="Edm.String" MaxLength="23" sap:display-format="UpperCase" sap:label="Chave coletor custos" sap:quickinfo="Chave de coletor de custos"/>
+                <Property Name="rtp01" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Produção repetitiva" sap:quickinfo="Coletor de custos para produção repetitiva"/>
+                <Property Name="rtp02" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="KANBAN" sap:quickinfo="Coletor de custos para Kanban"/>
+                <Property Name="rtp03" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Estoque ord.cliente" sap:quickinfo="Coletor de custos para estoque ordem cliente avaliado"/>
+                <Property Name="rtp04" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="PCP externo" sap:quickinfo="Coletor de custos para PCP externo"/>
+                <Property Name="ksvon" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Válido desde" sap:quickinfo="Coletor de custos válido desde"/>
+                <Property Name="ksbis" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Válido até" sap:quickinfo="Coletur de custos válido até"/>
+                <Property Name="objnp" Type="Edm.String" MaxLength="22" sap:display-format="UpperCase" sap:label="Nº objeto"/>
+                <Property Name="ndisr" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Não relevante" sap:quickinfo="Cód.: material em item de ordem irrelevante para MRP"/>
+                <Property Name="vfmng" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="amein" sap:label="Qtd.confirmada" sap:quickinfo="Qtd.confirmada p/ordem c/base nas verif.ATP de componentes"/>
+                <Property Name="gsbtr" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Data de confirmação" sap:quickinfo="Data confirmação global"/>
+                <Property Name="kzavc" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Tipo verif.disponib." sap:quickinfo="Código para tipo da verificação de disponibilidade"/>
+                <Property Name="kzbws" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Avaliação estq.esp." sap:quickinfo="Avaliação estoque especial"/>
+                <Property Name="xloek" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Marc.p/elimin." sap:quickinfo="Marcação para eliminação"/>
+                <Property Name="sernp" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Perfil do nº série" sap:quickinfo="Perfil de nºs série"/>
+                <Property Name="anzsn" Type="Edm.Int32" sap:label="Qtd.nºs de série" sap:quickinfo="Quantidade de nºs de série"/>
+                <Property Name="objtype" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Cód.modificação" sap:quickinfo="Código de modificação"/>
+                <Property Name="ch_proc" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Operação modif." sap:quickinfo="Operação que causa a modificação de um objeto"/>
+                <Property Name="fxpru" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Co-produto preç.fixo" sap:quickinfo="Co-produto preço fixo"/>
+                <Property Name="cuobj_root" Type="Edm.String" MaxLength="18" sap:display-format="NonNegative" sap:label="Nº interno do objeto" sap:quickinfo="Configuração (nº interno de objeto)"/>
+                <Property Name="berid" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Área MRP"/>
+                <Property Name="techs_copy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Avaliação standard" sap:quickinfo="Avaliação de validade/avaliação standard"/>
+                <Property Name="sgt_scat" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Segmento de estoque"/>
+                <Property Name="kunnr2" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Cliente" sap:quickinfo="Nº cliente"/>
+                <Property Name="fsh_season_year" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Ano de época"/>
+                <Property Name="fsh_season" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Época"/>
+                <Property Name="fsh_collection" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Coleção" sap:quickinfo="Coleção de moda"/>
+                <Property Name="fsh_theme" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Tema" sap:quickinfo="Tema de moda"/>
+                <Property Name="fsh_salloc_qty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="meins" sap:label="Estoque aloc." sap:quickinfo="Quantidade de estoque alocada"/>
+                <Property Name="mill_oc_aufnr_u" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Nº ordem origem" sap:quickinfo="Nº da ordem da ordem de origem"/>
+                <Property Name="mill_oc_rumng" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="amein" sap:label="Qtd.confirmada" sap:quickinfo="Quantidade confirmada para item"/>
+                <Property Name="mill_oc_sort" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Sequência" sap:quickinfo="Seqüência dos itens"/>
+                <NavigationProperty Name="to_Itens" Relationship="ZC_ORDENS_CDS.assoc_161412F80835CE28BB7CB348040113D7" FromRole="FromRole_assoc_161412F80835CE28BB7CB348040113D7" ToRole="ToRole_assoc_161412F80835CE28BB7CB348040113D7"/>
+            </EntityType>
+            <EntityType Name="ZI_ORDENS_ITENSType" sap:label="Itens da Ordem de Produção" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="aufnr"/>
+                    <PropertyRef Name="rsnum"/>
+                    <PropertyRef Name="rspos"/>
+                </Key>
+                <Property Name="aufnr" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="Ordem" sap:quickinfo="Nº ordem"/>
+                <Property Name="rsnum" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="NonNegative" sap:label="Reserva" sap:quickinfo="Nº reserva / necessidades dependentes"/>
+                <Property Name="rspos" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Nº item da reserva / das necessidades dependentes"/>
+                <Property Name="rsart" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Tipo de registro"/>
+                <Property Name="bdart" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Tipo de necessidade"/>
+                <Property Name="rssta" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status da reserva"/>
+                <Property Name="xloek" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Item foi eliminado"/>
+                <Property Name="xwaok" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Permitido movimento" sap:quickinfo="Movimento de mercadoria para reserva é permitido"/>
+                <Property Name="kzear" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Com registro final" sap:quickinfo="Registro final da reserva"/>
+                <Property Name="xfehl" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Peça em falta"/>
+                <Property Name="matnr" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Nº do material"/>
+                <Property Name="werks" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Centro"/>
+                <Property Name="lgort" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Depósito"/>
+                <Property Name="prvbe" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Área abastec.prod." sap:quickinfo="Área de abastecimento da produção"/>
+                <Property Name="charg" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Lote" sap:quickinfo="Número do lote"/>
+                <Property Name="plpla" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Distr.diferença" sap:quickinfo="Distribuição diferenças"/>
+                <Property Name="sobkz" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Estoque especial" sap:quickinfo="Código de estoque especial"/>
+                <Property Name="bdter" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Data da necessidade" sap:quickinfo="Data necessidade do componente"/>
+                <Property Name="bdmng" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="meins" sap:label="Qtd.necessária" sap:quickinfo="Quantidade necessária"/>
+                <Property Name="meins" Type="Edm.String" MaxLength="3" sap:label="Unid.medida básica" sap:quickinfo="Unidade de medida básica" sap:semantics="unit-of-measure"/>
+                <Property Name="shkzg" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Cód.débito/crédito" sap:quickinfo="Código débito/crédito"/>
+                <Property Name="fmeng" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="A quantidade é fixa"/>
+                <Property Name="enmng" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="meins" sap:label="Qtd.retirada"/>
+                <Property Name="enwrt" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="waers" sap:label="Valor retirado"/>
+                <Property Name="waers" Type="Edm.String" MaxLength="5" sap:label="Moeda" sap:quickinfo="Código da moeda" sap:semantics="currency-code"/>
+                <Property Name="erfmg" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="erfme" sap:label="Qtd.  UM registro" sap:quickinfo="Quantidade na unidade de medida do registro"/>
+                <Property Name="erfme" Type="Edm.String" MaxLength="3" sap:label="UM registro" sap:quickinfo="Unidade de medida do registro" sap:semantics="unit-of-measure"/>
+                <Property Name="plnum" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Ordem planejada"/>
+                <Property Name="banfn" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Requisição de compra" sap:quickinfo="Nº requisição de compra"/>
+                <Property Name="bnfpo" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:label="Item RC" sap:quickinfo="Nº do item da requisição de compra"/>
+                <Property Name="baugr" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Origem necessidade" sap:quickinfo="Material de conjunto superior"/>
+                <Property Name="sernr" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Nº de série"/>
+                <Property Name="kdauf" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Ordem do cliente" sap:quickinfo="Nº ordem do cliente"/>
+                <Property Name="kdpos" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative" sap:label="Item ord.cliente" sap:quickinfo="Nº item na ordem do cliente"/>
+                <Property Name="kdein" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Divisão ord.cliente" sap:quickinfo="Divisão de ordem de cliente"/>
+                <Property Name="projn" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="sem utilização" sap:quickinfo="Ultrapassado: nº projeto : NÃO utilizar mais!! -&gt; PS_POSNR"/>
+                <Property Name="bwart" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Tipo de movimento" sap:quickinfo="Tipo de movimento (administração de estoques)"/>
+                <Property Name="saknr" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Conta do Razão" sap:quickinfo="Nº conta do Razão"/>
+                <Property Name="gsber" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Divisão"/>
+                <Property Name="umwrk" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Centro receptor" sap:quickinfo="Centro receptor/emissor"/>
+                <Property Name="umlgo" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Depósito receptor" sap:quickinfo="Depósito de recebimento/de saída"/>
+                <Property Name="nafkz" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Cód.material subseq." sap:quickinfo="Código: material seguinte ativo/não ativo"/>
+                <Property Name="nomat" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Mat.subseq./original" sap:quickinfo="Material subsequente/original"/>
+                <Property Name="nomng" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Quantidade entrada" sap:quickinfo="Quantidade de entrada"/>
+                <Property Name="postp" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Categoria do item" sap:quickinfo="Ctg.item (lista técnica)"/>
+                <Property Name="posnr" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Item lista técnica" sap:quickinfo="Nº item da lista técnica"/>
+                <Property Name="roms1" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="romei" sap:label="Dimensão 1"/>
+                <Property Name="roms2" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="romei" sap:label="Dimensão 2"/>
+                <Property Name="roms3" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="romei" sap:label="Dimensão 3"/>
+                <Property Name="romei" Type="Edm.String" MaxLength="3" sap:label="UM peça em bruto" sap:quickinfo="Unidade de medida da peça em bruto 1 até 3" sap:semantics="unit-of-measure"/>
+                <Property Name="romen" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="QtdItnsDimVar" sap:quickinfo="Quantidade dos itens dimensão variável"/>
+                <Property Name="sgtxt" Type="Edm.String" MaxLength="50" sap:label="Texto" sap:quickinfo="Texto do item"/>
+                <Property Name="lmeng" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="meins" sap:label="Qtd.necessária" sap:quickinfo="Quantidade necessaria p/administração de material em UGR"/>
+                <Property Name="rohps" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Item dimens.variável" sap:quickinfo="Código item de dimensão variável"/>
+                <Property Name="rform" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Chave de fórmula"/>
+                <Property Name="roanz" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Nº peças bruto" sap:quickinfo="Número de peças em bruto"/>
+                <Property Name="flmng" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="meins" sap:label="Qtd.em falta" sap:quickinfo="Qtd.em falta da componente na ordem"/>
+            </EntityType>
+            <Association Name="assoc_161412F80835CE28BB7CB348040113D7" sap:content-version="1">
+                <End Type="ZC_ORDENS_CDS.ZC_ORDENSType" Multiplicity="1" Role="FromRole_assoc_161412F80835CE28BB7CB348040113D7"/>
+                <End Type="ZC_ORDENS_CDS.ZI_ORDENS_ITENSType" Multiplicity="*" Role="ToRole_assoc_161412F80835CE28BB7CB348040113D7"/>
+            </Association>
+            <EntityContainer Name="ZC_ORDENS_CDS_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZC_ORDENS" EntityType="ZC_ORDENS_CDS.ZC_ORDENSType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZI_ORDENS_ITENS" EntityType="ZC_ORDENS_CDS.ZI_ORDENS_ITENSType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_161412F80835CE28BB7CB348040113D7" Association="ZC_ORDENS_CDS.assoc_161412F80835CE28BB7CB348040113D7" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZC_ORDENS" Role="FromRole_assoc_161412F80835CE28BB7CB348040113D7"/>
+                    <End EntitySet="ZI_ORDENS_ITENS" Role="ToRole_assoc_161412F80835CE28BB7CB348040113D7"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZC_ORDENS_CDS/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZC_ORDENS_CDS/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

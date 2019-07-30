@@ -1,0 +1,63 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" controllerName="itsgrp.com.br.OrdemSemiAcabado.controller.Detail">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+			<ObjectHeader introActive="true" titleActive="true" id="__header0" responsive="true"/>
+			<List noDataText="Drop list items here" id="__list0">
+				<items>
+					<StandardListItem type="Active" title="Ordem: {aufnr}" id="__item1" iconInset="false" iconDensityAware="false"/>
+					<StandardListItem type="Active" title="Material {matnr} - {maktx}" id="__item2" iconInset="false" iconDensityAware="false"/>
+					<StandardListItem type="Active" title="Quantidade: {gamng} - {meins}" id="__item3" iconInset="false" iconDensityAware="false"/>
+					<StandardListItem type="Active" title="Peças por Saco: {QtdPec} - PC" id="__item4" iconInset="false" iconDensityAware="false"/>
+					<StandardListItem type="Active" title="Peso por Saco: {PesoSac} - KG" id="__item5" iconInset="false" iconDensityAware="false"/>
+				</items>
+			</List>
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://factory" tooltip="{i18n>detailIconTabBarInfo}">
+						<content>
+							<Label text="{i18n>operador}:" width="20%" id="__label0"/>
+							<Input width="70%" id="idOperador" value="{oper}" required="true" tooltip="required"/>
+							<Label text="{i18n>peso} :" width="20%" id="__label3"/>
+							<Input width="30%" id="iptPeso" editable="false" value="{valor}"/>
+							<Button text="{i18n>iniciar}" width="150px" id="__button0" type="Emphasized" activeIcon="sap-icon://compare" press="onPeso"/>
+						</content>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+			<Table id="lineItemsList" width="auto" items="{to_Itens}" updateFinished="onListUpdateFinished" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar id="lineItemsToolbar">
+						<Title id="lineItemsHeader" text="{i18n>itens}"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>material}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+						<Text text="{i18n>quantidade}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+						<Text text="{i18n>lote}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End" width="1px">
+						<Text text="" visible="false"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier text="{matnr} - {maktx}"/>
+							<ObjectNumber number="{bdmng}" unit="{meins}"/>
+							<Input ariaLabelledBy="__text7" width="70%" id="iptLote" value="{charg}" required="true" enabled="{activelote}"/>
+							<ObjectIdentifier text="{aufnr}" visible="false"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+		<semantic:positiveAction>
+			<semantic:PositiveAction text="{i18n>imprimir}" id="__action0" press="ApontaProd" enabled="false"/>
+		</semantic:positiveAction>
+	</semantic:DetailPage>
+</mvc:View>
